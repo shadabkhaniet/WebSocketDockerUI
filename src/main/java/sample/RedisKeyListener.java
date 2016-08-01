@@ -5,8 +5,6 @@ import java.nio.CharBuffer;
 
 import redis.clients.jedis.JedisPubSub;
 
-import javax.websocket.Session;
-
 import org.apache.catalina.websocket.WsOutbound;
 
 public class RedisKeyListener extends JedisPubSub {
