@@ -3,19 +3,20 @@ package sample;
 import java.io.IOException;
 import java.nio.CharBuffer;
 
+import javax.websocket.Session;
+
 import redis.clients.jedis.JedisPubSub;
 
-import org.apache.catalina.websocket.WsOutbound;
 
 public class RedisKeyListener extends JedisPubSub {
-
-    public WsOutbound      wsOutbound;
-
-    private static Integer counter = 0;
-
-    public RedisKeyListener(WsOutbound wsOutbound) {
-        this.wsOutbound = wsOutbound;
-    }
+//
+//    public WsOutbound      wsOutbound;
+//
+//    private static Integer counter = 0;
+//
+//    public RedisKeyListener(WsOutbound wsOutbound) {
+//        this.wsOutbound = wsOutbound;
+//    }
 
     // final static Logger logger = Logger.getLogger(RedisKeyListener.class);
 
@@ -37,19 +38,29 @@ public class RedisKeyListener extends JedisPubSub {
 
         CharBuffer outbuf = CharBuffer.wrap("- " + str2);
 
-        try {
-            this.wsOutbound.writeTextMessage(outbuf);
-            this.wsOutbound.flush();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        try{
+            for(Session session : WebSockRedis.sessionList){
+                //asynchronous communication
+                session.getBasicRemote().sendText(str2);
+            }
+        }catch(IOException e){
             e.printStackTrace();
         }
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        
+        
+//        try {
+//            this.wsOutbound.writeTextMessage(outbuf);
+//            this.wsOutbound.flush();
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
         // counter = 0;
 
         // } else {
@@ -92,3 +103,4 @@ public class RedisKeyListener extends JedisPubSub {
     }
 
 }
+
