@@ -19,6 +19,7 @@
     <groupId>org.apache.tomcat</groupId>
     <artifactId>tomcat-websocket-api</artifactId>
     <version>7.0.70</version>
+<scope>provided</scope>
 </dependency>
 
 
@@ -26,6 +27,7 @@
    <groupId>org.apache.tomcat</groupId>
    <artifactId>tomcat-api</artifactId>
    <version>7.0.70</version>
+<scope>provided</scope>
 </dependency>
 
  <dependency>
@@ -59,10 +61,12 @@
 					<artifactId>commons-logging</artifactId>
 				 </exclusion>
 			</exclusions>
+<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
+<scope>provided</scope>
 			<version>${org.springframework-version}</version>
 		</dependency>
 				
@@ -71,6 +75,7 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
+<scope>provided</scope>
 		</dependency>	
 		
 		<!-- Logging -->
@@ -78,18 +83,21 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
+<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+<scope>provided</scope>
+		<!--	<scope>runtime</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
+<!--			<scope>runtime</scope> -->
+<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -113,7 +121,8 @@
 					<artifactId>jmxri</artifactId>
 				</exclusion>
 			</exclusions>
-			<scope>runtime</scope>
+<scope>provided</scope>		
+<!--	<scope>runtime</scope>-->
 		</dependency>
 
 		<!-- @Inject -->
@@ -121,6 +130,7 @@
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<version>1</version>
+<scope>provided</scope>
 		</dependency>
 				
 		<!-- Servlet -->
@@ -140,6 +150,7 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
+<scope>provided</scope>
 		</dependency>
 	
 		<!-- Test -->
@@ -159,6 +170,7 @@
 	            		<artifactId>*</artifactId>
         	    	</exclusion>
 	            </exclusions>
+<scope>provided</scope>
         	</dependency>
 	</dependencies>
 	<build>
@@ -174,7 +186,8 @@
 					<warName>${project.artifactId}</warName>
 <warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>	
-<packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>	
+<!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->	
+<packagingIncludes>WEB-INF/lib/jedis-2.4.2.jar</packagingIncludes>
 <skinnyWars>true</skinnyWars>
 <webResources>
             <resource>
