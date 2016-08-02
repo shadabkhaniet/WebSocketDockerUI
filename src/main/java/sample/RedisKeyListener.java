@@ -14,9 +14,9 @@ public class RedisKeyListener extends JedisPubSub {
 //
 //    private static Integer counter = 0;
 //
-//    public RedisKeyListener(WsOutbound wsOutbound) {
+    public RedisKeyListener() {
 //        this.wsOutbound = wsOutbound;
-//    }
+    }
 
     // final static Logger logger = Logger.getLogger(RedisKeyListener.class);
 
