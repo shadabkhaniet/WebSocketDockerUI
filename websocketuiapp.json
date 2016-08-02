@@ -1,5 +1,5 @@
 {
-    "family": "websocketuiapp",
+     "family": "websocketuiapp",
     "containerDefinitions": [
         {
             "image": "registry.hub.docker.com/shadabkhaniet/websocketuiapp:v_%BUILD_NUMBER%",
