@@ -15,8 +15,6 @@
 		<mitreid-connect-version>1.2.2</mitreid-connect-version>
 	</properties>
 	<dependencies>
-
-
 		<dependency>
 			<groupId>org.mitre</groupId>
 			<artifactId>openid-connect-client</artifactId>
