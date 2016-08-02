@@ -1,0 +1,18 @@
+{
+    "family": "websocketuiapp",
+    "containerDefinitions": [
+        {
+            "image": "registry.hub.docker.com/shadabkhaniet/websocketuiapp:v_%BUILD_NUMBER%",
+            "name": "websocketuiapp",
+            "cpu": 10,
+            "memory": 256,
+            "essential": true,
+            "portMappings": [
+                {
+                    "containerPort": 8080,
+                    "hostPort": 80
+                }
+            ]
+        }
+    ]
+}
