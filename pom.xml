@@ -12,18 +12,8 @@
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<spring.security.version>3.2.8.RELEASE</spring.security.version>
-		<mitreid-connect-version>1.2.2</mitreid-connect-version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.mitre</groupId>
-			<artifactId>openid-connect-client</artifactId>
-			<version>${mitreid-connect-version}</version>
-		</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
-
-<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-catalina -->
-<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-websocket-api -->
 <dependency>
     <groupId>org.apache.tomcat</groupId>
     <artifactId>tomcat-websocket-api</artifactId>
