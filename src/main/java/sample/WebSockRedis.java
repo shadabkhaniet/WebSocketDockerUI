@@ -36,7 +36,7 @@ public class WebSockRedis {
                             System.out.println("Subscribing to \"__key*__:user*\". This thread will be blocked.");
                             // jedis1.psubscribe(keyExpiredListener,
                             // "__key*__:*");
-                            jedisInstance.psubscribe(redisKeyListener, "__key*__:user*");
+                            jedisInstance.psubscribe(redisKeyListener, "__key*__:USER*");
                             System.out.println("Subscription ended.");
                         } catch (Exception e) {
                             e.printStackTrace();
