@@ -187,7 +187,7 @@
 <warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>	
 <!-- <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes> -->	
-<packagingIncludes>WEB-INF/lib/jedis-2.4.2.jar</packagingIncludes>
+<!-- <packagingIncludes>WEB-INF/lib/jedis-2.4.2.jar</packagingIncludes> -->
 <skinnyWars>true</skinnyWars>
 <webResources>
             <resource>
