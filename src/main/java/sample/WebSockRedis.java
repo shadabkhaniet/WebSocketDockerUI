@@ -23,7 +23,7 @@ public class WebSockRedis {
             // asynchronous communication
             session.getBasicRemote().sendText("Hello!");
             try {
-                final Jedis jedisInstance = new Jedis("ec2-52-33-201-37.us-west-2.compute.amazonaws.com", 6379, 120000);
+                final Jedis jedisInstance = new Jedis("ec2-52-37-251-153.us-west-2.compute.amazonaws.com", 6379, 120000);
 
                 final RedisKeyListener redisKeyListener = new RedisKeyListener();
 
@@ -69,3 +69,4 @@ public class WebSockRedis {
         }
     }
 }
+
