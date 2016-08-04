@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Tomcat web socket</title>
+<script type="text/javascript">
+   var ws = new WebSocket("ws://ec2contai-ecselast-171o02cychz7q-265082752.us-west-2.elb.amazonaws.com/myapp/wsocket"); 
+   
+ <!--  var ws = new WebSocket("ws://localhost:8080/WebSocketExample/wsocket"); -->
+   var count = 0;
+   
+   ws.onopen = function () {
+   };
+
+      ws.onmessage = function(message) {
+    document.getElementById("msgArea").textContent += message.data + "\n";     
+    var textarea = document.getElementById('msgArea');
+	textarea.scrollTop = textarea.scrollHeight;         
+	count = count + 1;
+	//alert(count);
+	document.getElementById("count").innerHTML = count; 
+      };
+
+      function postToServer() {
+    ws.send(document.getElementById("msg").value);
+    document.getElementById("msg").value = "";
+   }
+
+   function closeConnect() {
+    ws.close();
+   }
+  </script>
+</head>
+
+<body>
+	<div>
+		<textarea rows="4" cols="100" id="msgArea" readonly></textarea>
+	</div>
+	<div>User added in current browser session: <span id="count"></span></div>
+	<br>
+	<div>
+		<input id="msg" type="text" />
+		
+		<button type="submit" id="sendButton" onclick="postToServer()">Send</button>
+	</div>
+</body>
+</html>
