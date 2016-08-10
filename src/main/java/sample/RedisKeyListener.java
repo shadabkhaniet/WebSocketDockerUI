@@ -18,7 +18,7 @@ public class RedisKeyListener extends JedisPubSub {
 
     private static Integer      counter   = 0;
 
-    private static StringBuffer strBuffer = new StringBuffer();
+//    private static StringBuffer strBuffer = new StringBuffer();
 
     //
     public RedisKeyListener() {
@@ -43,7 +43,7 @@ public class RedisKeyListener extends JedisPubSub {
         if (channel.split(":").length >= 2)
             str2 = channel.split(":")[1];
 
-        strBuffer = strBuffer.append("\n" + str2);
+//        strBuffer = strBuffer.append("\n" + str2);
 
         CharBuffer outbuf = CharBuffer.wrap("- " + str2);
 
@@ -51,8 +51,8 @@ public class RedisKeyListener extends JedisPubSub {
             for (Session session : WebSockRedis.sessionList) {
                 // asynchronous communication
                 // session.getBasicRemote().setBatchingAllowed(true);
-                session.getBasicRemote().sendText(strBuffer.toString());
-                System.err.println("sending string: " + strBuffer);
+                session.getBasicRemote().sendText(str2);
+                System.err.println("sending string: " + str2);
             }
         } catch (IOException e) {
             e.printStackTrace();
