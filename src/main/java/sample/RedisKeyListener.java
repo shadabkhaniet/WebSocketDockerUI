@@ -42,7 +42,7 @@ public class RedisKeyListener extends JedisPubSub {
         if (channel.split(":").length >= 2)
             str2 = channel.split(":")[1];
 
-        strBuffer = strBuffer.append("\n" + str2);
+        strBuffer = strBuffer.append(str2);
         
         CharBuffer outbuf = CharBuffer.wrap("- " + str2);
 
@@ -51,7 +51,7 @@ public class RedisKeyListener extends JedisPubSub {
         {
             
             try {
-                Thread.sleep(2000);
+                Thread.currentThread().sleep(1000);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -62,6 +62,9 @@ public class RedisKeyListener extends JedisPubSub {
 //                    session.getBasicRemote().setBatchingAllowed(true);
                     session.getBasicRemote().sendText(strBuffer.toString());
                     System.err.println("sending string: " + strBuffer);
+                    strBuffer = new StringBuffer();  
+                    counter = 0;
+//                    strBuffer = strBuffer.append("\n");
                 }
             }catch(IOException e){
                 e.printStackTrace();
@@ -69,8 +72,9 @@ public class RedisKeyListener extends JedisPubSub {
         }
         else 
         {
-            strBuffer = strBuffer.append("\n" + str2);
-            counter = counter - 1;
+            System.err.println("counter value before" +counter);
+            strBuffer = strBuffer.append(str2);
+            counter = counter - 2;
             System.err.println("counter decreased value: "+ counter);
         }
 
