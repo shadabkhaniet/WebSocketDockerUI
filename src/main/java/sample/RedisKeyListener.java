@@ -8,20 +8,21 @@ import javax.websocket.Session;
 
 import redis.clients.jedis.JedisPubSub;
 
-
 public class RedisKeyListener extends JedisPubSub {
-//
-//    public WsOutbound      wsOutbound;
-//
-    
-//    private static final Logger myLogger = Logger.getLogger(RedisKeyListener.class.getName());
-    
-    private static Integer counter = 0;
-    
-    private static StringBuffer strBuffer = new StringBuffer(); 
-//
+    //
+    // public WsOutbound wsOutbound;
+    //
+
+    // private static final Logger myLogger =
+    // Logger.getLogger(RedisKeyListener.class.getName());
+
+    private static Integer      counter   = 0;
+
+    private static StringBuffer strBuffer = new StringBuffer();
+
+    //
     public RedisKeyListener() {
-//        this.wsOutbound = wsOutbound;
+        // this.wsOutbound = wsOutbound;
     }
 
     // final static Logger logger = Logger.getLogger(RedisKeyListener.class);
@@ -42,56 +43,59 @@ public class RedisKeyListener extends JedisPubSub {
         if (channel.split(":").length >= 2)
             str2 = channel.split(":")[1];
 
-        strBuffer = strBuffer.append(str2);
-        
+        strBuffer = strBuffer.append("\n" + str2);
+
         CharBuffer outbuf = CharBuffer.wrap("- " + str2);
 
-        
-        if(counter == 1)
-        {
-            
-            try {
-                Thread.currentThread().sleep(1000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+        try {
+            for (Session session : WebSockRedis.sessionList) {
+                // asynchronous communication
+                // session.getBasicRemote().setBatchingAllowed(true);
+                session.getBasicRemote().sendText(strBuffer.toString());
+                System.err.println("sending string: " + strBuffer);
             }
-            try{
-                for(Session session : WebSockRedis.sessionList){
-                    //asynchronous communication
-//                    session.getBasicRemote().setBatchingAllowed(true);
-                    session.getBasicRemote().sendText(strBuffer.toString());
-                    System.err.println("sending string: " + strBuffer);
-                    strBuffer = new StringBuffer();  
-                    counter = 0;
-//                    strBuffer = strBuffer.append("\n");
-                }
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-        else 
-        {
-            System.err.println("counter value before" +counter);
-            strBuffer = strBuffer.append(str2);
-            counter = counter - 2;
-            System.err.println("counter decreased value: "+ counter);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+//        if (counter == 1) {
+//
+//            try {
+//                Thread.currentThread().sleep(2000);
+//            } catch (InterruptedException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//            try {
+//                for (Session session : WebSockRedis.sessionList) {
+//                    // asynchronous communication
+//                    // session.getBasicRemote().setBatchingAllowed(true);
+//                    session.getBasicRemote().sendText(strBuffer.toString());
+//                    System.err.println("sending string: " + strBuffer);
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//            System.err.println("counter value before" + counter);
+//            strBuffer = strBuffer.append("\n" + str2);
+//            counter = counter - 2;
+//            System.err.println("counter decreased value: " + counter);
+//        }
 
-//        try {
-//            this.wsOutbound.writeTextMessage(outbuf);
-//            this.wsOutbound.flush();
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
+        // try {
+        // this.wsOutbound.writeTextMessage(outbuf);
+        // this.wsOutbound.flush();
+        // } catch (IOException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
+        // try {
+        // Thread.sleep(5000);
+        // } catch (InterruptedException e) {
+        // // TODO Auto-generated catch block
+        // e.printStackTrace();
+        // }
         // counter = 0;
 
         // } else {
