@@ -37,22 +37,26 @@ public class RedisKeyListener extends JedisPubSub {
 
         System.out.println("onPMessage pattern " + pattern + " " + channel + " " + message);
         String str2 = "";
-
+        String str3 = "";
         // if (counter == 0) {
         counter = counter + 1;
         if (channel.split(":").length >= 2)
             str2 = channel.split(":")[1];
 
+        
+        if(str2.split("_").length >= 2)
+            str3 = str2.split("_")[1];
+        
 //        strBuffer = strBuffer.append("\n" + str2);
 
-        CharBuffer outbuf = CharBuffer.wrap("- " + str2);
+//        CharBuffer outbuf = CharBuffer.wrap("- " + str2);
 
         try {
             for (Session session : WebSockRedis.sessionList) {
                 // asynchronous communication
                 // session.getBasicRemote().setBatchingAllowed(true);
-                session.getBasicRemote().sendText(str2);
-                System.err.println("sending string: " + str2);
+                session.getBasicRemote().sendText(str3);
+                System.err.println("sending string: " + str3);
             }
         } catch (IOException e) {
             e.printStackTrace();

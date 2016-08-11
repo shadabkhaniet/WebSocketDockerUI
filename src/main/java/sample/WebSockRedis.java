@@ -21,7 +21,7 @@ public class WebSockRedis {
         try {
             sessionList.add(session);
             // asynchronous communication
-            session.getBasicRemote().sendText("Hello!");
+            session.getBasicRemote().sendText("-");
             try {
                 final Jedis jedisInstance = new Jedis("ec2-52-37-251-153.us-west-2.compute.amazonaws.com", 6379, 120000);
 
@@ -36,7 +36,7 @@ public class WebSockRedis {
                             System.out.println("Subscribing to \"__key*__:user*\". This thread will be blocked.");
                             // jedis1.psubscribe(keyExpiredListener,
                             // "__key*__:*");
-                            jedisInstance.psubscribe(redisKeyListener, "__key*__:USER*");
+                            jedisInstance.psubscribe(redisKeyListener, "__key*__:Rate_*");
                             System.out.println("Subscription ended.");
                         } catch (Exception e) {
                             e.printStackTrace();

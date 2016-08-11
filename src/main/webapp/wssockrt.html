@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="pagestyle.css" type="text/css">
 <meta charset="utf-8">
 <title>Tomcat web socket</title>
 <script type="text/javascript">
-    var ws = new WebSocket("ws://ec2contai-ecselast-171o02cychz7q-265082752.us-west-2.elb.amazonaws.com/myapp/wsocket"); 
+    var ws = new WebSocket("ws://ec2contai-ecselast-171o02cychz7q-265082752.us-west-2.elb.amazonaws.com/myapp/wsocket");  
    
-  <!--  var ws = new WebSocket("ws://localhost:8080/DockerUI/wsocket");  -->
+ <!--   var ws = new WebSocket("ws://localhost:8080/DockerUI/wsocket");  -->
     var count = 0;
    
 	ws.onopen = function () {
@@ -14,15 +15,29 @@
 	};
 
     ws.onmessage = function(message) {
-	    document.getElementById("msgArea").textContent += message.data + "\n";     
-	    var textarea = document.getElementById('msgArea');
-		textarea.scrollTop = textarea.scrollHeight;
-		
-		count = document.getElementById("msgArea").textContent.split(/\r\n|\r|\n/).length;
-		         
-		 <!--  count = count + 1; -->
-		//alert(count);
-		document.getElementById("count").innerHTML = count; 
+  	    document.getElementById("currentRate").innerHTML = message.data;
+  	    var a = parseFloat(message.data) ;
+  	     	    
+  	    if(document.getElementById("highestRate").innerHTML == '-')
+  	    {
+  	    	document.getElementById("highestRate").innerHTML = message.data;
+  	    } 
+  	    
+  	    if(document.getElementById("lowestRate").innerHTML == '-')
+  	    {
+  	    	document.getElementById("lowestRate").innerHTML = message.data;
+  	    } 
+  	    
+  	    <!-- alert(a + document.getElementById("highestRate").innerHTML + document.getElementById("lowestRate").innerHTML) -->
+  	    
+    	if(a > document.getElementById("highestRate").innerHTML)
+    	{
+    		document.getElementById("highestRate").innerHTML = message.data;
+    	}
+		if(a < document.getElementById("lowestRate").innerHTML)
+    	{
+    		document.getElementById("lowestRate").innerHTML = message.data;
+    	}
     };
 
     function postToServer() {
@@ -37,15 +52,20 @@
 </head>
 
 <body>
-	<div>
-		<textarea rows="4" cols="100" id="msgArea" readonly></textarea>
-	</div>
-	<div>User added in current browser session: <span id="count"></span></div>
-	<br>
-	<div>
-		<input id="msg" type="text" />
-		
-		<button type="submit" id="sendButton" onclick="postToServer()">Send</button>
-	</div>
+<h1>Currency Exchange Rate</h1>
+<table class="rwd-table">
+  <tr>
+    <th>Currency</th>
+    <th>Current Rate</th>
+    <th>Highest Rate of the Day</th>
+    <th>Lowest Rate of the Day</th>
+  </tr>
+  <tr>
+    <td data-th="Movie Title">USD/SGD</td>
+    <td id="currentRate" data-th="Genre"></td>
+    <td id="highestRate" data-th="Year">-</td>
+    <td id="lowestRate" data-th="Gross">-</td>
+  </tr>
+</table>
 </body>
 </html>
